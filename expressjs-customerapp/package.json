@@ -9,7 +9,8 @@
   "dependencies": {
     "body-parser": "*",
     "ejs": "^2.5.6",
-    "express": "*"
+    "express": "*",
+    "express-validator": "^3.2.0"
   },
   "author": "Imran Farid",
   "license": "ISC"
