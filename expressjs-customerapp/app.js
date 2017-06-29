@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var expressValidator = require('express-validator');
+var mongojs = require('mongojs');
+var db = mongojs('customerapp', ['user']);
 
 var app = express();
 
@@ -51,7 +53,7 @@ app.use(expressValidator({
 }));
 
 
-
+/*
 var users = [
     {
         id: 1,
@@ -72,13 +74,19 @@ var users = [
         email: 'jameshatefield@gmail.com'
     }
 ]
+*/
 
 app.get('/', function(req, res){
     //res.send('Hello World!');
-    res.render('index', {
-        title: 'Customers',
-        users: users
-    });
+    db.user.find(function (err, docs) {
+        //console.log(docs);
+        res.render('index', {
+            title: 'Customers',
+            users: docs
+        });
+    })
+
+    
 });
 
 app.post('/users/add', function(req, res){
@@ -101,7 +109,14 @@ app.post('/users/add', function(req, res){
             last_name: req.body.last_name,
             email: req.body.email,
         }
-        console.log('SUCESS');
+        //console.log('SUCESS');
+
+        db.user.insert(newUser, function(err, result){
+            if(err){
+                console.log(err);
+            }
+            res.redirect('/');
+        });
     }
 })
 

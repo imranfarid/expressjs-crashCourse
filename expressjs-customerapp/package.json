@@ -10,7 +10,8 @@
     "body-parser": "*",
     "ejs": "^2.5.6",
     "express": "*",
-    "express-validator": "^3.2.0"
+    "express-validator": "^3.2.0",
+    "mongojs": "^2.4.0"
   },
   "author": "Imran Farid",
   "license": "ISC"
